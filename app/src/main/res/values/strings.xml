@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">WeatherApp</string>
+    <string name="drawer_header_tv">WeatherApp by Andrej Vukelić</string>
+    <string name="add_location">Add location</string>
+    <string name="placeholder_new_location_input">Enter a city name</string>
+    <string name="add_new_location">Add new location</string>
+    <string name="error_location_not_exist">Location does not exist</string>
+    <string name="error_location_already_on_list">You already have this location on list</string>
+    <string name="error_empty_input_field">Location should not be empty</string>
+    <string name="location_added_success_toast_message">Location added successfully!</string>
+    <string name="remove_location">Remove location</string>
+    <string name="sub_menu_title">Locations</string>
 </resources>
