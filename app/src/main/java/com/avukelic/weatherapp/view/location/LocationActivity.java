@@ -1,40 +1,27 @@
 package com.avukelic.weatherapp.view.location;
 
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.SubMenu;
 
+import com.avukelic.weatherapp.Consts;
 import com.avukelic.weatherapp.R;
-import com.avukelic.weatherapp.model.LocationWrapper;
 import com.avukelic.weatherapp.presentation.LocationPresenter;
-import com.avukelic.weatherapp.util.AlertDialogUtils;
 import com.avukelic.weatherapp.view.newLocation.NewLocationActivity;
-
-import java.util.List;
+import com.avukelic.weatherapp.view.weather.WeatherFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class LocationActivity extends AppCompatActivity implements LocationContract.View, AlertDialogUtils.OnAlertDialogButtonClickListener {
+public class LocationActivity extends AppCompatActivity implements LocationContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
-    @BindView(R.id.location_drawer_layout)
-    DrawerLayout drawerLayout;
-    @BindView(R.id.location_navigation_view)
-    NavigationView navigationView;
-
-    private Menu drawerMenu;
-    private SubMenu drawerSubMenu;
 
     LocationContract.Presenter presenter;
 
@@ -50,15 +37,24 @@ public class LocationActivity extends AppCompatActivity implements LocationContr
     @Override
     protected void onResume() {
         super.onResume();
-        presenter.getLocations();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.location_action_settings, menu);
+        return true;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case (android.R.id.home):
-                drawerLayout.openDrawer(GravityCompat.START);
+            case R.id.location_search:
+                startActivityForResult(new Intent(this, NewLocationActivity.class), Consts.NEW_LOCATION_REQUEST_CODE);
+                return true;
+            case R.id.location_map_search:
+                //startActivityForResult(new Intent(this, MapActivity.class), Consts.MAP_REQUEST_CODE);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -66,64 +62,27 @@ public class LocationActivity extends AppCompatActivity implements LocationContr
     private void initUi() {
         ButterKnife.bind(this);
         initToolbar();
-        initNavigationDrawer();
-        initDrawerLocationSubMenu();
+        createWeatherFragment("Zagreb");
     }
 
     private void initToolbar() {
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("WeatherApp");
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setDisplayHomeAsUpEnabled(true);
-            actionBar.setHomeButtonEnabled(true);
-        }
-        toolbar.setNavigationIcon(R.drawable.ic_navigation_drawer);
     }
 
-    private void initNavigationDrawer() {
-        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(MenuItem item) {
-                //presenter.onDrawerItemClicked(item.getItemId());
-                return false;
-            }
-        });
-    }
-
-    private void initDrawerLocationSubMenu() {
-        drawerMenu = navigationView.getMenu();
-        drawerSubMenu = drawerMenu.addSubMenu(R.string.sub_menu_title);
-    }
-
-    @Override
-    public void showLocationsInDrawer(List<LocationWrapper> locations) {
-        drawerSubMenu.clear();
-        if (locations.size() > 0) {
-            for (int i = 0; i < locations.size(); i++) {
-                drawerSubMenu.add(Menu.NONE, i, Menu.NONE, locations.get(i).getLocation());
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Consts.NEW_LOCATION_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                createWeatherFragment(data.getStringExtra("location"));
+                getSupportActionBar().setTitle(data.getStringExtra("location").toUpperCase());
             }
         }
     }
 
-    @Override
-    public void onNewLocationDrawerItemClicked() {
-        startActivity(new Intent(this, NewLocationActivity.class));
-        drawerLayout.closeDrawers();
-    }
-
-    @Override
-    public void onLocationDrawerItemClicked(int itemId) {
-        AlertDialogUtils.askForDeleteAlertDialog(this, drawerSubMenu.getItem(itemId).toString(), this,itemId);
-    }
-
-    @Override
-    public void onLocationRemove(int itemId) {
-        drawerSubMenu.removeItem(itemId);
-    }
-
-    @Override
-    public void onAlertDialogConfirm(String location, int itemId) {
-        presenter.deleteLocationFromDb(location, itemId);
+    private void createWeatherFragment(String location) {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        WeatherFragment weatherFragment = WeatherFragment.newInstance(location);
+        ft.replace(R.id.weather_fragment, weatherFragment);
+        ft.commit();
     }
 }

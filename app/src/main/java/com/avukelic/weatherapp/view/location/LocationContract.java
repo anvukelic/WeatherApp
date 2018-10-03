@@ -10,22 +10,10 @@ import java.util.List;
 public interface LocationContract {
 
     interface View {
-        void showLocationsInDrawer(List<LocationWrapper> locations);
 
-        void onNewLocationDrawerItemClicked();
-
-        void onLocationDrawerItemClicked(int itemId);
-
-        void onLocationRemove(int itemId);
     }
 
     interface Presenter {
         void setView(LocationContract.View view);
-
-        void getLocations();
-
-        void deleteLocationFromDb(String location, int itemId);
-
-        void onDrawerItemClicked(int itemId);
     }
 }

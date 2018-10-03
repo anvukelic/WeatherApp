@@ -12,15 +12,19 @@ public class WeatherResponse {
     @SerializedName("main")
     private Main main;
     @Expose
+    @SerializedName("dt")
+    private String time;
+    @Expose
     @SerializedName("wind")
     private Wind wind;
     @Expose
     @SerializedName("name")
     private String cityName;
 
-    public WeatherResponse(Weather[] weather, Main main, Wind wind, String dt_txt, String cityName) {
+    public WeatherResponse(Weather[] weather, Main main, Wind wind, String time, String cityName) {
         this.weather = weather;
         this.main = main;
+        this.time = time;
         this.wind = wind;
         this.cityName = cityName;
     }
@@ -46,6 +50,14 @@ public class WeatherResponse {
 
     public void setMain(Main main) {
         this.main = main;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
     }
 
     public void setWind(Wind wind) {

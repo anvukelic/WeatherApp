@@ -13,11 +13,11 @@ public class ApiInteractorImpl implements ApiInteractor {
 
     @Override
     public void checkLocationIfExists(String location, Callback<WeatherResponse> callback) {
-        App.getApiService().getWeather(Consts.APP_ID, location).enqueue(callback);
+        App.getApiService().getWeather(Consts.APP_ID, location, Consts.METRIC).enqueue(callback);
     }
 
     @Override
     public void getWeather(String location, Callback<WeatherResponse> callback) {
-        App.getApiService().getWeather(Consts.APP_ID,location).enqueue(callback);
+        App.getApiService().getWeather(Consts.APP_ID,location, Consts.METRIC).enqueue(callback);
     }
 }

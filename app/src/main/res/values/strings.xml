@@ -10,4 +10,21 @@
     <string name="location_added_success_toast_message">Location added successfully!</string>
     <string name="remove_location">Remove location</string>
     <string name="sub_menu_title">Locations</string>
+    <string name="no_internet_connection_message">You have no internet connection</string>
+
+    <string name="weather_time_hint">Today, July 26</string>
+    <string name="weather_temperature_hint">26°</string>
+    <string name="weather_wind_speed_hint">Wind 24.5 km/h</string>
+    <string name="weather_pressure_hint">1024.00 hpa</string>
+    <string name="weather_humidity_hint">80%</string>
+    <string name="weather_time">Today, %1$s</string>
+    <string name="weather_temperature">%1$s°</string>
+    <string name="weather_wind_speed">Wind %1$.1f km/h</string>
+    <string name="weather_pressure">%1$.2f hpa</string>
+    <string name="weather_humidity">%1$d%% humidity</string>
+    <string name="weather_description_hint">Scattered clouds</string>
+    <string name="weather_main_hint">Clear</string>
+    <string name="weather_fragment_loading_failure_toast_message">Could not load weather data, please refresh.</string>
+    <string name="search_title">Search</string>
+    <string name="location_map_search">Map</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.avukelic.weatherapp.view.newLocation;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -9,12 +10,14 @@ import android.widget.Toast;
 
 import com.avukelic.weatherapp.R;
 import com.avukelic.weatherapp.presentation.NewLocationPresenter;
+import com.avukelic.weatherapp.util.NetworkUtils;
+import com.avukelic.weatherapp.view.location.LocationActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class NewLocationActivity extends AppCompatActivity implements NewLocationContract.View{
+public class NewLocationActivity extends AppCompatActivity implements NewLocationContract.View {
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -22,6 +25,7 @@ public class NewLocationActivity extends AppCompatActivity implements NewLocatio
     EditText newLocationInput;
 
     NewLocationContract.Presenter presenter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,13 +51,16 @@ public class NewLocationActivity extends AppCompatActivity implements NewLocatio
     }
 
     @OnClick(R.id.new_location_add_btn)
-    void addNewLocation(){
+    void addNewLocation() {
         presenter.addNewLocation(newLocationInput.getText().toString());
     }
 
     @Override
-    public void onNewLocationAdded() {
+    public void onNewLocationAdded(String location) {
         Toast.makeText(this, getString(R.string.location_added_success_toast_message), Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent();
+        intent.putExtra("location", location);
+        setResult(RESULT_OK, intent);
         finish();
     }
 

@@ -6,7 +6,7 @@ package com.avukelic.weatherapp.view.newLocation;
 public interface NewLocationContract {
 
     interface View {
-        void onNewLocationAdded();
+        void onNewLocationAdded(String location);
 
         void showErrorNoLocationExist();
 

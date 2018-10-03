@@ -16,12 +16,10 @@ import retrofit2.Response;
  */
 public class NewLocationPresenter implements NewLocationContract.Presenter {
 
-    private DbInteractor dbInteractor;
     private ApiInteractor apiInteractor;
     private NewLocationContract.View newLocationView;
 
     public NewLocationPresenter() {
-        dbInteractor = new DbInteractorImpl();
         apiInteractor = new ApiInteractorImpl();
     }
 
@@ -30,33 +28,22 @@ public class NewLocationPresenter implements NewLocationContract.Presenter {
         this.newLocationView = view;
     }
 
-    private boolean isLocationAlreadyOnList(String location) {
-        return dbInteractor.isLocationAlreadyOnList(location);
-    }
-
     @Override
     public void addNewLocation(String location) {
-        if (location.isEmpty() || location.trim().length() == 0) {
-            newLocationView.showErrorLocationInputFieldEmpty();
-        } else if (isLocationAlreadyOnList(location)) {
-            newLocationView.showErrorOnLocationAlreadyOnList();
-        } else {
-            apiInteractor.checkLocationIfExists(location, getWeatherCheckCallback(location));
-        }
+        apiInteractor.checkLocationIfExists(location, getWeatherCheckCallback(location));
     }
+
 
     private Callback<WeatherResponse> getWeatherCheckCallback(final String location) {
         return new Callback<WeatherResponse>() {
             @Override
             public void onResponse(Call<WeatherResponse> call, Response<WeatherResponse> response) {
                 if (response.isSuccessful()) {
-                    dbInteractor.saveLocation(location);
-                    newLocationView.onNewLocationAdded();
+                    newLocationView.onNewLocationAdded(location);
                 } else {
                     newLocationView.showErrorNoLocationExist();
                 }
             }
-
             @Override
             public void onFailure(Call<WeatherResponse> call, Throwable t) {
             }
