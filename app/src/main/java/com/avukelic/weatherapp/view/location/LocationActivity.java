@@ -181,7 +181,7 @@ public class LocationActivity extends AppCompatActivity {
         this.lat = lat;
         this.location = "";
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        WeatherFragment weatherFragment = WeatherFragment.newInstance(lon, lat);
+        WeatherFragment weatherFragment = WeatherFragment.newInstance(lat, lon);
         ft.replace(R.id.weather_fragment, weatherFragment);
         ft.commit();
     }

@@ -40,7 +40,7 @@ public class WeatherPresenter implements WeatherContract.Presenter {
 
     @Override
     public void getWeatherByGps(double lon, double lat) {
-        apiInteractor.getWeatherByGps(lon, lat, getWeatherCallback());
+        apiInteractor.getWeatherByGps(lat, lon, getWeatherCallback());
     }
 
     @Override

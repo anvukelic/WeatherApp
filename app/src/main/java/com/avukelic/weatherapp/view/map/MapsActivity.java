@@ -31,9 +31,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        manageMapClick();
-    }
-    private void manageMapClick(){
         mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener(){
             public void onMapClick(LatLng point){
                 Intent returnIntent = new Intent();
@@ -43,5 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 finish();
             }
         });
+    }
+    private void manageMapClick(){
+
     }
 }

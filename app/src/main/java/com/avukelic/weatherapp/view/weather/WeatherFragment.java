@@ -116,9 +116,8 @@ public class WeatherFragment extends Fragment implements WeatherContract.View, W
             presenter.getWeather(location);
             presenter.getWeatherForecast(location);
         } else {
-
-            presenter.getWeatherByGps(lon,lat);
-            presenter.getWeatherForecastByGps(lon,lat);
+            presenter.getWeatherByGps(lat,lon);
+            presenter.getWeatherForecastByGps(lat,lon);
         }
     }
 
