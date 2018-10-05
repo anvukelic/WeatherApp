@@ -3,6 +3,8 @@
     package="com.avukelic.weatherapp">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -20,8 +22,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.newLocation.NewLocationActivity"
-            android:parentActivityName=".view.location.LocationActivity"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCajR0wcL1-6oACLsVZBaOYF-cKrGz6yZg" />
+
+        <activity
+            android:name=".view.map.MapsActivity"
+            android:label="@string/title_activity_maps"/>
     </application>
 
 </manifest>

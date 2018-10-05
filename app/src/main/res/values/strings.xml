@@ -12,12 +12,12 @@
     <string name="sub_menu_title">Locations</string>
     <string name="no_internet_connection_message">You have no internet connection</string>
 
-    <string name="weather_time_hint">Today, July 26</string>
+    <string name="weather_time_hint">Fri, October 04</string>
     <string name="weather_temperature_hint">26°</string>
     <string name="weather_wind_speed_hint">Wind 24.5 km/h</string>
     <string name="weather_pressure_hint">1024.00 hpa</string>
     <string name="weather_humidity_hint">80%</string>
-    <string name="weather_time">Today, %1$s</string>
+    <string name="weather_time">%1$s</string>
     <string name="weather_temperature">%1$s°</string>
     <string name="weather_wind_speed">Wind %1$.1f km/h</string>
     <string name="weather_pressure">%1$.2f hpa</string>
@@ -26,5 +26,9 @@
     <string name="weather_main_hint">Clear</string>
     <string name="weather_fragment_loading_failure_toast_message">Could not load weather data, please refresh.</string>
     <string name="search_title">Search</string>
-    <string name="location_map_search">Map</string>
+    <string name="location_map_search">Search on map</string>
+    <string name="search_hint">Search</string>
+    <string name="refresh_title">refresh</string>
+    <string name="weather_city_hint">Osijek</string>
+    <string name="title_activity_maps">Map</string>
 </resources>

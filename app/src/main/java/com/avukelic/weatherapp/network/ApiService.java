@@ -1,5 +1,6 @@
 package com.avukelic.weatherapp.network;
 
+import com.avukelic.weatherapp.model.ForecastResponse;
 import com.avukelic.weatherapp.model.WeatherResponse;
 
 import retrofit2.Call;
@@ -13,4 +14,10 @@ public interface ApiService {
 
     @GET("/data/2.5/weather")
     Call<WeatherResponse> getWeather(@Query("appid") String apiKey, @Query("q") String city, @Query("units") String units);
+    @GET("/data/2.5/weather")
+    Call<WeatherResponse> getWeatherWithGps(@Query("appid") String apiKey, @Query("lat") double lat,@Query("lon") double lon, @Query("units") String units);
+    @GET("/data/2.5/forecast")
+    Call<ForecastResponse> getForecast(@Query("appid") String apiKey, @Query("q") String city, @Query("units") String units);
+    @GET("/data/2.5/forecast")
+    Call<ForecastResponse> getForecastWithGps(@Query("appid") String apiKey, @Query("lat") double lat,@Query("lon") double lon, @Query("units") String units);
 }

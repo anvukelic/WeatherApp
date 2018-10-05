@@ -1,5 +1,11 @@
 package com.avukelic.weatherapp.view.weather;
 
+import android.widget.Toast;
+
+import com.avukelic.weatherapp.model.WeatherResponse;
+
+import java.util.List;
+
 /**
  * Created by avukelic on 03-Oct-18.
  */
@@ -19,14 +25,24 @@ public interface WeatherContract {
 
         void showDescription(String description);
 
-        void showOnNetworkError(int message);
+        void showOnFailureError();
 
-        void showOnFailurError();
+        void hideProgressBar();
+
+        void showWeatherForecast(List<WeatherResponse> weatherResponses);
+
+        void showCity(String cityName);
     }
 
     interface Presenter {
         void setView(WeatherContract.View view);
 
         void getWeather(String location);
+
+        void getWeatherForecast(String location);
+
+        void getWeatherByGps(double lon, double lat);
+
+        void getWeatherForecastByGps(double lon, double lat);
     }
 }

@@ -10,7 +10,7 @@ public class Consts {
     public static final String DEFAULT_CITY = "Osijek";
     public static final String METRIC = "metric";
 
-    public static final int NEW_LOCATION_REQUEST_CODE = 10;
+    public static final int PLACE_AUTOCOMPLETE_REQUEST_CODE = 1;
     public static final int MAP_REQUEST_CODE = 20;
 
     public final static String SNOW = "13d.png";
@@ -31,4 +31,5 @@ public class Consts {
     public final static String WIND_WEST = "West";
     public final static String WIND_SOUTH = "South";
     public final static String WIND_EAST = "East";
+    public static final int PERMISSIONS_REQUEST_LOCATION_CODE = 100;
 }
