@@ -112,6 +112,7 @@ public class WeatherFragment extends Fragment implements WeatherContract.View, W
     }
 
     private void initUi() {
+        initForecastRecycler();
         if (location.trim().length() != 0) {
             presenter.getWeather(location);
             presenter.getWeatherForecast(location);
@@ -119,6 +120,14 @@ public class WeatherFragment extends Fragment implements WeatherContract.View, W
             presenter.getWeatherByGps(lat,lon);
             presenter.getWeatherForecastByGps(lat,lon);
         }
+    }
+
+    private void initForecastRecycler() {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        mAdapter = new WeatherForecastAdapter(this, getActivity());
+        mWeatherForecastRecylcerView.setItemAnimator(new DefaultItemAnimator());
+        mWeatherForecastRecylcerView.setLayoutManager(layoutManager);
+        mWeatherForecastRecylcerView.setAdapter(mAdapter);
     }
 
     @Override
@@ -171,11 +180,7 @@ public class WeatherFragment extends Fragment implements WeatherContract.View, W
 
     @Override
     public void showWeatherForecast(List<WeatherResponse> weatherResponses) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        mAdapter = new WeatherForecastAdapter(this, weatherResponses, getActivity());
-        mWeatherForecastRecylcerView.setItemAnimator(new DefaultItemAnimator());
-        mWeatherForecastRecylcerView.setLayoutManager(layoutManager);
-        mWeatherForecastRecylcerView.setAdapter(mAdapter);
+        mAdapter.refreshData(weatherResponses);
     }
 
     @Override

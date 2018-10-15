@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,14 +31,19 @@ import butterknife.OnClick;
  */
 public class WeatherForecastAdapter extends RecyclerView.Adapter<WeatherForecastAdapter.MyViewHolder> {
 
-    private List<WeatherResponse> weatherResponses;
+    private List<WeatherResponse> weatherResponses = new ArrayList<>();
     private WeatherForecastClickListener listener;
     private Context context;
 
-    public WeatherForecastAdapter(WeatherForecastClickListener listener, List<WeatherResponse> weatherResponses, Context context) {
+    public WeatherForecastAdapter(WeatherForecastClickListener listener, Context context) {
         this.listener = listener;
-        this.weatherResponses = weatherResponses;
         this.context = context;
+    }
+
+    public void refreshData(List<WeatherResponse> weatherList){
+        weatherResponses.clear();
+        weatherResponses.addAll(weatherList);
+        notifyDataSetChanged();
     }
 
     @NonNull
